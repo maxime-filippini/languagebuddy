@@ -177,3 +177,5 @@ entire idea folder.
 
 data/*.xlsx
 data/*.db
+
+testing/*

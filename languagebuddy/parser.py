@@ -48,15 +48,22 @@ class LessonParser:
     def __init__(self) -> None:
         pass
 
-    def parse_single_line(self, line: str):
-        tags = [getattr(LineTag, t_s) for t_s in re.findall(RE_TAG, line)]
+    def _get_tags_from_line(self, line: str):
+        return [getattr(LineTag, t_s) for t_s in re.findall(RE_TAG, line)]
+
+    def parse_single_line(self, line: str) -> LessonItem:
+        """Parse a single line of a lesson note.
+
+        Args:
+            line (str): Line from a note
+
+        Returns:
+            LessonItem: Lesson item
+        """
+        tags = self._get_tags_from_line(line)
         full_line = re.sub(RE_TAG, "", line).strip()
 
-        if "=" in full_line:
-            # This is a vocab item
-            *phrases, comment = RE_VOCAB.match(full_line).groups()
-
-        return LessonItem(text=line, tags=tags)
+        return LessonItem(text=full_line, tags=tags)
 
     def parse(self, path: str) -> LessonData:
         with open(path) as f:

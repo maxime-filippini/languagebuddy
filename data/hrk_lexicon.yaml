@@ -1,0 +1,18 @@
+adverbs:
+  skupo: [costly, expensive]
+
+adjectives:
+  tjelesan: physical
+  drugačiji: different
+
+verbs:
+  - impf: { inf: odabirati, conj: odabirem }
+    pf: { inf: odabrati, conj: odaberem }
+    eng: to choose
+  - impf: { inf: davati, conj: dam }
+    pf: { inf: dati, conj: dajem }
+    eng: to give
+
+sayings:
+  - croatian: blablabla
+    english: huhuhuhuh
