@@ -1,7 +1,8 @@
-import pandas as pd
 import argparse
-from pathlib import Path
 import sqlite3
+from pathlib import Path
+
+import pandas as pd
 
 COLS_TO_IGNORE = ["Duplicate?", "Duplicate", "To check?", "To fill?"]
 COL_MAP = {
@@ -40,7 +41,7 @@ def process_anki(df):
         lambda df: df.assign(anki=df["Anki?"].fillna(False))
         if "Anki?" in df.columns
         else df.assign(anki=False)
-    ).pipe(lambda df: df.drop(columns=set(["Anki?"]).intersection(df.columns)))
+    ).pipe(lambda df: df.drop(columns={"Anki?"}.intersection(df.columns)))
 
 
 def remove_cols(df, cols):
@@ -105,7 +106,7 @@ def main() -> int:
     f = pd.ExcelFile(path)
 
     all_sheets = set(f.sheet_names)
-    normal_sheets = set(["Nouns", "Adjectives", "Adverbs", "ToSort"]).intersection(
+    normal_sheets = {"Nouns", "Adjectives", "Adverbs", "ToSort"}.intersection(
         all_sheets
     )
 
